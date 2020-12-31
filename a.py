@@ -1,13 +1,13 @@
-import os
+import xlrd
 
+wb = xlrd.open_workbook("sample.xls")
+sheet = wb.sheet_by_index(0)
 
+print("\nNumber of rows : ",sheet.nrows)
+print("\nNumber of columns : ",sheet.ncols)
 
-allfiles = os.listdir()
+print("\nThe column names : ",[sheet.cell_value(0, i) for i in range(sheet.ncols) ])
 
-for i in allfiles:
-    if i == "a.py" or i == "create.py":
-        continue
+print("\n The first column values : ",[sheet.cell_value(i, 0) for i in range(sheet.nrows)])
 
-    newlist = i.split("-")
-    newname = newlist[1]+"-"+newlist[0]+"-"+newlist[2]
-    os.rename(i,newname) 
+print("\nValue of first row : ",sheet.row_values(1))
